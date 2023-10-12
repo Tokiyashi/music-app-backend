@@ -7,15 +7,21 @@ const RoomController = {
     return room
   },
 
-  getAll: async () => {
-    const rooms = await Room.find({})
+  getAll: async (userId: string) => {
+    const rooms = await Room.find({creatorId: userId})
 
     return rooms
   },
 
-  create: async (value: typeof Room) => {
-    const room = await Room.create(value)
+  deleteOne: async (id: string) => {
+    const room = await Room.findByIdAndDelete(id)
 
+    return room
+  },
+
+  create: async (value: typeof Room) => {
+    const room = await Room.create({...value, allTracks: [], trackQueue: []})
+    console.log(room)
     return room
   },
 

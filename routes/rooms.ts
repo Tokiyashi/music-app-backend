@@ -1,6 +1,7 @@
 import {Router} from "express";
 import RoomController from "../controllers/room";
 import {roomCreateValidator, roomUpdateValidator} from "../schemes/room";
+import {io} from "../socket";
 
 const rooms = Router()
 rooms.post('/', async (req, res) => {
@@ -25,21 +26,29 @@ rooms.put('/', async (req, res) => {
 
   const room = await RoomController.update(value._id, value)
 
+  io.to('room1').emit('update room', value)
   res.send(room)
 })
 rooms.get('/', async (req, res) => {
-  console.log('123')
-  const rooms = await RoomController.getAll()
+  const userId = req.query?.userId.toString()
 
-  res.send('asd')
+  const rooms = await RoomController.getAll(userId)
+
+  res.send(rooms)
 })
 
 rooms.get('/:id', async (req, res) => {
   const id = req.params.id
   const room = await RoomController.getRoom(id)
-  console.log(room.toObject())
+
   res.send(room)
 })
 
+rooms.delete('/:id', async (req, res) => {
+  const id = req.params.id
+  const room = await RoomController.deleteOne(id)
+
+  res.send(room)
+})
 
 export default rooms
