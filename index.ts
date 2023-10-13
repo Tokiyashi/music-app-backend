@@ -4,7 +4,10 @@ import mongoose from "mongoose";
 import {initSockets} from "./socket";
 
 const express = require('express')
-const app = express({cors: true, origin: "http://localhost:3000"})
+const app = express({
+  cors: true,
+  origin: process.env.DEVELOP ? "http://localhost:3000" : "https://tune-town.netlify.app"
+})
 require('dotenv').config({path: '.env'});
 
 const port = 9000
