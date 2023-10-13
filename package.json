@@ -5,7 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "run": "nodemon index.ts",
-    "build": "ts-node-esm index.ts"
+    "build": "nodemon index.ts"
   },
   "repository": {
     "type": "git",
