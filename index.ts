@@ -7,7 +7,7 @@ import serverless from "serverless-http";
 const express = require('express')
 const app = express({
   cors: true,
-  origin: process.env.ORIGIN_URL
+  origin: '*'
 })
 require('dotenv').config({path: '.env'});
 
