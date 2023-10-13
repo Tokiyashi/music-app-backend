@@ -2,6 +2,7 @@ import userRouter from "./routes/users"
 import roomsRouter from "./routes/rooms"
 import mongoose from "mongoose";
 import {initSockets} from "./socket";
+import serverless from "serverless-http";
 
 const express = require('express')
 const app = express({
@@ -25,4 +26,4 @@ app.listen(port, () => {
 initSockets();
 app.use("/users", userRouter)
 app.use("/rooms", roomsRouter)
-export default app
+export const handler = serverless(app);
