@@ -1,6 +1,5 @@
 import * as mongoose from "mongoose";
 
-
 const roomSchema = new mongoose.Schema({
   name: String,
   creatorId: String,
@@ -21,6 +20,10 @@ const roomSchema = new mongoose.Schema({
     title: String,
     artistName: String,
     id: String,
-  }
+  },
+  usersOnline: [{
+    id: String,
+    name: String,
+  }]
 }, {versionKey: false})
 export const Room = mongoose.model('Room', roomSchema);

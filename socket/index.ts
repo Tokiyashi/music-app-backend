@@ -1,4 +1,5 @@
 import {Server} from "socket.io";
+import RoomController from "../controllers/room";
 
 export const io = new Server({
   cors: {
@@ -13,9 +14,32 @@ export const initSockets = () => {
   io.on('connection', (socket) => {
     console.log('user connected');
 
-    socket.on('join room', (room) => {
-      socket.join(room);
-      console.log('user connected to room', room);
+    socket.on('join room', async (value) => {
+      const {roomId, userName, userId} = value
+      socket.join(roomId);
+      const currentRoom = await RoomController.getRoom(roomId)
+
+      await RoomController.update(roomId, {
+        ...currentRoom,
+        usersOnline: [...currentRoom.usersOnline, {
+          name: userName,
+          id: userId.toString()
+        }]
+      })
+
+      console.log(currentRoom)
+      console.log(userName, 'user connected to room', roomId);
+    })
+
+    socket.on('leave room', async (value) => {
+      const {roomId, userId} = value
+      socket.leave(roomId);
+
+      const currentRoom = await RoomController.getRoom(roomId)
+      await RoomController.update(roomId, {
+        ...currentRoom,
+        usersOnline: currentRoom.usersOnline.filter(user => user.id !== userId)
+      })
     })
 
     socket.on('update room', (data) => {

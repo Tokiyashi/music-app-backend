@@ -1,7 +1,6 @@
 import {Router} from "express";
 import RoomController from "../controllers/room";
 import {roomCreateValidator, roomUpdateValidator} from "../schemes/room";
-import {io} from "../socket";
 
 const rooms = Router()
 rooms.post('/', async (req, res) => {
@@ -23,10 +22,8 @@ rooms.put('/', async (req, res) => {
     res.status(400).send(error.details[0].message)
     return
   }
-
   const room = await RoomController.update(value._id, value)
 
-  io.to('room1').emit('update room', value)
   res.send(room)
 })
 rooms.get('/', async (req, res) => {

@@ -3,8 +3,13 @@ import * as Joi from "joi";
 const track = Joi.object({
   url: Joi.string().required(),
   title: Joi.string().required(),
-  id: Joi.string(),
+  id: Joi.string().required(),
   artistName: Joi.string().required(),
+})
+
+const user = Joi.object({
+  id: Joi.string().required(),
+  name: Joi.string().required(),
 })
 
 export const roomCreateValidator = Joi.object({
@@ -19,5 +24,6 @@ export const roomUpdateValidator = Joi.object({
   trackQueue: Joi.array().items(track),
   currentTrack: track.optional(),
   creatorId: Joi.string().required(),
+  usersOnline: Joi.array().items(user),
 })
 
