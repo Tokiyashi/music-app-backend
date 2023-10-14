@@ -8,6 +8,7 @@
     "start": "node api.ts",
     "build": "node api.ts"
   },
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Tokiyashi/music-app-backend.git"
