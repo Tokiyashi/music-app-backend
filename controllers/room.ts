@@ -3,6 +3,7 @@ import {Room as RoomType} from "../types/room";
 import {io} from "../socket";
 
 const RoomController = {
+
   getRoom: async (id: string): Promise<RoomType> => {
     const room = await Room.findById(id)
 

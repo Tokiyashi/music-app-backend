@@ -4,10 +4,11 @@ external_node_modules = ["express"]
 node_bundler = "esbuild"
 [[redirects]]
 force = true
-from = "/*"
+from = "/"
 status = 200
-to = "/.netlify/functions/:splat"
-
+to = "/.netlify/functions/index"
+[build]
+functions = 'functions'
 ## Uncomment to use this redirect for Single Page Applications like create-react-app.
 ## Not needed for static site generators.
 #[[redirects]]

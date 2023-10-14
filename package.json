@@ -2,14 +2,18 @@
   "name": "tune-town-backend",
   "version": "1.0.0",
   "description": "Enjoy music",
-  "main": "index.ts",
+  "main": "api.ts",
   "scripts": {
-    "run": "nodemon index.ts",
-    "build": "nodemon index.ts"
+    "dev": "nodemon api.ts",
+    "start": "node api.ts",
+    "build": "node api.ts"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Tokiyashi/music-app-backend.git"
+  },
+  "engines": {
+    "node": "18.x"
   },
   "author": "",
   "license": "ISC",
