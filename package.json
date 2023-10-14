@@ -5,8 +5,8 @@
   "main": "api.ts",
   "scripts": {
     "dev": "nodemon api.ts",
-    "start": "node api.ts",
-    "build": "node api.ts"
+    "start": "nodemon api.ts",
+    "build": "nodemon api.ts"
   },
   "type": "module",
   "repository": {
