@@ -2,7 +2,6 @@ import userRouter from "./routes/users"
 import roomsRouter from "./routes/rooms"
 import mongoose from "mongoose";
 import {initSockets} from "./socket";
-import serverless from "serverless-http";
 import {Router} from "express";
 
 const express = require('express')
@@ -30,7 +29,6 @@ app.listen(port, () => {
 })
 
 initSockets();
-app.use("/.netlify/functions/api", router)
+app.use("/", router)
 app.use("/users", userRouter)
 app.use("/rooms", roomsRouter)
-export const handler = serverless(app);
