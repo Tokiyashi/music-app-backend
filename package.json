@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon api.ts",
     "start": "node api.js",
-    "build": "nodemon api.ts"
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
