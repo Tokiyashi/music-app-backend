@@ -3,12 +3,12 @@ import * as Joi from "joi";
 const track = Joi.object({
   url: Joi.string().required(),
   title: Joi.string().required(),
-  id: Joi.string().required(),
+  _id: Joi.string().optional(),
   artistName: Joi.string().required(),
 })
 
 const user = Joi.object({
-  id: Joi.string().required(),
+  _id: Joi.string().required(),
   name: Joi.string().required(),
 })
 

@@ -23,7 +23,7 @@ export const initSockets = () => {
         ...currentRoom,
         usersOnline: [...currentRoom.usersOnline, {
           name: userName,
-          id: userId.toString()
+          _id: userId
         }]
       })
 
@@ -38,7 +38,7 @@ export const initSockets = () => {
       const currentRoom = await RoomController.getRoom(roomId)
       await RoomController.update(roomId, {
         ...currentRoom,
-        usersOnline: currentRoom.usersOnline.filter(user => user.id !== userId)
+        usersOnline: currentRoom.usersOnline.filter(user => user._id !== userId)
       })
     })
 

@@ -2,7 +2,7 @@ type Track = {
   url: string;
   title: string;
   artistName: string;
-  id: string;
+  _id: string;
 }
 
 export type Room = {
@@ -12,5 +12,5 @@ export type Room = {
   trackQueue: Track[];
   currentTrack: Track;
   creatorId: string;
-  usersOnline: { name: string, id: string }[];
+  usersOnline: { name: string, _id: string }[];
 }
