@@ -3,13 +3,12 @@ import RoomController from "../controllers/room";
 
 export const io = new Server({
   cors: {
-    origin: process.env.ORIGIN_URL || 'https://tune-town.netlify.app',
-    methods: ["GET", "POST"]
+    origin: '*'
   }
 });
 
-export const initSockets = () => {
 
+export const initSockets = () => {
   io.listen(9090);
 
   io.on('connection', (socket) => {
