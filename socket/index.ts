@@ -3,7 +3,8 @@ import RoomController from "../controllers/room";
 
 export const io = new Server({
   cors: {
-    origin: process.env.ORIGIN_URL
+    origin: process.env.ORIGIN_URL,
+    methods: ["GET", "POST"]
   }
 });
 
