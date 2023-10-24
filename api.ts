@@ -11,7 +11,7 @@ const app = express({
 })
 require('dotenv').config({path: '.env'});
 
-const port = 9000
+const port = 80
 const cors = require('cors')
 
 mongoose.connect(process.env.DATABASE_URL)
@@ -20,15 +20,12 @@ app.use(express.json())
 app.use(cors())
 
 const router = Router()
-router.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
 
 initSockets();
-app.use("/", router)
 app.use("/users", userRouter)
 app.use("/rooms", roomsRouter)

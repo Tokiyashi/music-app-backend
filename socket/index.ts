@@ -9,7 +9,7 @@ export const io = new Server({
 
 
 export const initSockets = () => {
-  io.listen(9090);
+  io.listen(80);
 
   io.on('connection', (socket) => {
     console.log('user connected');
