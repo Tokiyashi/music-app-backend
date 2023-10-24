@@ -11,7 +11,7 @@ const app = express({
 })
 require('dotenv').config({path: '.env'});
 
-const port = 80
+const port = 9000
 const cors = require('cors')
 
 mongoose.connect(process.env.DATABASE_URL)
