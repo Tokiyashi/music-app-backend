@@ -1,6 +1,8 @@
 import {Server} from "socket.io";
 import RoomController from "../controllers/room";
 
+require('dotenv').config({path: '.env'});
+
 export const io = new Server({
   cors: {
     origin: '*'
@@ -9,7 +11,7 @@ export const io = new Server({
 
 
 export const initSockets = () => {
-  io.listen(9000);
+  io.listen(Number(process.env.SOCKETS_PORT));
 
   io.on('connection', (socket) => {
     console.log('user connected');

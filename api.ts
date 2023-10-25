@@ -4,14 +4,16 @@ import mongoose from "mongoose";
 import {initSockets} from "./socket";
 import {Router} from "express";
 
+require('dotenv').config({path: '.env'});
+
 const express = require('express')
+
 const app = express({
   cors: true,
   origin: process.env.ORIGIN_URL
 })
-require('dotenv').config({path: '.env'});
 
-const port = 9000
+const port = Number(process.env.PORT)
 const cors = require('cors')
 
 mongoose.connect(process.env.DATABASE_URL)
