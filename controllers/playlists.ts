@@ -1,13 +1,13 @@
-import {Room} from "../models/Room";
-import {Room as RoomType} from "../types/room";
 import {io} from "../socket";
 import mongoose from "mongoose";
+import {Playlist} from "../models/Playlist";
+import {Playlist as PlaylistType} from "../types/playlist";
 
-const RoomController = {
+const PlaylistController = {
 
-  getRoom: async (id: string): Promise<RoomType> => {
+  getOne: async (id: string) => {
     try {
-      const room = await Room.findById(id)
+      const room = await Playlist.findById(id)
       return room?.toObject()
     } catch (e) {
       console.error(e)
@@ -15,31 +15,31 @@ const RoomController = {
     }
   },
 
-  getAll: async (userId: string) => {
-    const rooms = await Room.find({creatorId: userId})
+  getAll: async (creatorId: string) => {
+    const rooms = await Playlist.find({creatorId})
 
     return rooms
   },
 
   deleteOne: async (id: string) => {
-    const room = await Room.findByIdAndDelete(id)
+    const room = await Playlist.findByIdAndDelete(id)
 
     return room
   },
 
-  create: async (value: typeof Room) => {
-    const room = await Room.create({...value, allTracks: [], trackQueue: [], usersOnline: []})
+  create: async (value: PlaylistType) => {
+    const room = await Playlist.create({...value, allTracks: [], trackQueue: [], usersOnline: []})
 
     return room
   },
 
-  update: async (id: string, value: RoomType) => {
+  update: async (id: string, value: PlaylistType) => {
     const tracksWithIds = value.allTracks.map(track => !track._id ? {
       ...track,
       _id: new mongoose.Types.ObjectId()
     } : track)
     const newRoom = {...value, allTracks: tracksWithIds}
-    const room = await Room.findByIdAndUpdate(id, newRoom)
+    const room = await Playlist.findByIdAndUpdate(id, newRoom)
     io.to(newRoom._id.toString()).emit('update room', newRoom)
 
     console.log(newRoom._id.toString(), 'Получено сообщение в комнате', newRoom.name)
@@ -47,4 +47,4 @@ const RoomController = {
     return room
   }
 }
-export default RoomController
+export default PlaylistController

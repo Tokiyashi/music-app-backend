@@ -1,5 +1,6 @@
 import userRouter from "./routes/users"
 import roomsRouter from "./routes/rooms"
+import playlistsRouter from "./routes/playlists"
 import mongoose from "mongoose";
 import {initSockets} from "./socket";
 import {Router} from "express";
@@ -31,3 +32,4 @@ app.listen(port, () => {
 initSockets();
 app.use("/users", userRouter)
 app.use("/rooms", roomsRouter)
+app.use("/playlists", playlistsRouter)

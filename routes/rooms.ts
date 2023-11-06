@@ -36,9 +36,23 @@ rooms.get('/', async (req, res) => {
 
 rooms.get('/:id', async (req, res) => {
   const id = req.params.id
-  const room = await RoomController.getRoom(id)
 
-  res.send(room)
+  if (!id.match(/^[0-9a-fA-F]{24}$/) || id.length !== 24) {
+    res.status(400).send({error: "Invalid room ID"})
+    return
+  }
+
+  try {
+    const room = await RoomController.getRoom(id)
+    if (!room) {
+      res.sendStatus(404)
+      return
+    }
+    res.send(room)
+  } catch (err) {
+    res.status(400).send({error: "Invalid room ID"})
+  }
+
 })
 
 rooms.delete('/:id', async (req, res) => {

@@ -1,9 +1,4 @@
-type Track = {
-  url: string;
-  title: string;
-  artistName: string;
-  _id: string;
-}
+import {Track} from "./track";
 
 export type Room = {
   name: string;

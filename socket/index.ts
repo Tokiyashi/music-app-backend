@@ -19,17 +19,17 @@ export const initSockets = () => {
     socket.on('join room', async (value) => {
       const {roomId, userName, userId} = value
       socket.join(roomId);
-      const currentRoom = await RoomController.getRoom(roomId)
+      // const currentRoom = await RoomController.getRoom(roomId)
+      //
+      // await RoomController.update(roomId, {
+      //   ...currentRoom,
+      //   usersOnline: [...currentRoom.usersOnline, {
+      //     name: userName,
+      //     _id: userId
+      //   }]
+      // })
 
-      await RoomController.update(roomId, {
-        ...currentRoom,
-        usersOnline: [...currentRoom.usersOnline, {
-          name: userName,
-          _id: userId
-        }]
-      })
-
-      console.log(currentRoom)
+      // console.log(currentRoom)
       console.log(userName, 'user connected to room', roomId);
     })
 
@@ -37,11 +37,11 @@ export const initSockets = () => {
       const {roomId, userId} = value
       socket.leave(roomId);
 
-      const currentRoom = await RoomController.getRoom(roomId)
-      await RoomController.update(roomId, {
-        ...currentRoom,
-        usersOnline: currentRoom.usersOnline.filter(user => user._id !== userId)
-      })
+      // const currentRoom = await RoomController.getRoom(roomId)
+      // await RoomController.update(roomId, {
+      //   ...currentRoom,
+      //   usersOnline: currentRoom?.usersOnline?.filter(user => user._id !== userId)
+      // })
     })
 
     socket.on('update room', (data) => {
